@@ -1,15 +1,8 @@
 extends Node
 
-const BALL_SIZE = 1.125
+const player_class = preload("res://player.gd")
 
-enum Ball{
-	SOLID_1, SOLID_2, SOLID_3,
-	SOLID_4, SOLID_5, SOLID_6,
-	SOLID_7, BALL_8, STRIPE_9,
-	STRIPE_10, STRIPE_11, STRIPE_12,
-	STRIPE_13, STRIPE_14, STRIPE_15,
-	CUE_BALL
-}
+const BALL_SIZE = 1.125
 
 const ball_styles = [
 	"default"
@@ -23,8 +16,19 @@ const cue_styles = [
 	
 ]
 
+signal game_start()
+signal new_turn(player)
+
+var world = null
+
 func _ready():
-	pass
+	new_player()
 
 func _process(delta):
-	
+	pass
+
+func game_in_progress():
+	return world != null
+
+func new_player():
+	add_child(player_class.new())

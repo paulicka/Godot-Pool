@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://camera/camera.gd" type="Script" id=1]
+[ext_resource path="res://world/camera/camera.gd" type="Script" id=1]
 
-[node name="CameraOrigin" type="Spatial" index="0"]
+[node name="Camera" type="Spatial" index="0"]
 
 script = ExtResource( 1 )
 
@@ -21,14 +21,5 @@ fov = 70.0
 size = 1.0
 near = 0.05
 far = 100.0
-
-[node name="MoveTween" type="Tween" parent="." index="1"]
-
-repeat = false
-playback_process_mode = 1
-playback_speed = 1.0
-playback/active = false
-playback/repeat = false
-playback/speed = 1.0
 
 
