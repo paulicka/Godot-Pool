@@ -1,6 +1,8 @@
 tool
 extends Node
 
+const BALL_SIZE = 1.125
+
 enum Ball{
 	SOLID_1, SOLID_2, SOLID_3,
 	SOLID_4, SOLID_5, SOLID_6,
@@ -25,4 +27,4 @@ func set_type(new_type):
 		$BallMesh.material_override.albedo_texture = get_texture()
 
 func get_texture(): # Create a style class to automate this later
-	return load("res://ball/style/default/" + Ball.keys()[type].to_lower() + ".png")
+	return load("res://ball/styles/default/" + Ball.keys()[type].to_lower() + ".png")

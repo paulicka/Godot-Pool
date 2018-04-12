@@ -37,7 +37,7 @@ func process_world(world, delta):
 	world.get_camera().rotate(yaw, pitch)
 	
 	var zoom = 0.0
-	var delta_zoom = 8.0 * delta
+	var delta_zoom = 12.0 * delta
 	if Input.is_key_pressed(KEY_T):
 		zoom -= delta_zoom
 	if Input.is_key_pressed(KEY_G):

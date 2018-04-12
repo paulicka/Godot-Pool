@@ -1,8 +1,15 @@
 extends Node
 
 const player_class = preload("res://player.gd")
+const ball_class = preload("res://ball/ball/ball.gd")
 
-const BALL_SIZE = 1.125
+enum SCREEN{
+	IDLE, LOBBY, GAME, END
+}
+
+enum STAGE{
+	PLACE, PLAN, PLAY
+}
 
 const ball_styles = [
 	"default"
@@ -18,6 +25,7 @@ const cue_styles = [
 
 signal game_start()
 signal new_turn(player)
+signal new_stage(mode)
 
 var world = null
 
