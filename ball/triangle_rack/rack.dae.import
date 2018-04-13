@@ -2,15 +2,15 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/table.dae-806c4ee75eb599a32253c236068af3d0.scn"
+path="res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn"
 
 [deps]
 
-source_file="res://table/table.dae"
-source_md5="a678d34dbb447498b3801d2448c41b9f"
+source_file="res://ball/triangle_rack/rack.dae"
+source_md5="1308b7e2bdc9541802e714ec234e88b7"
 
-dest_files=[ "res://.import/table.dae-806c4ee75eb599a32253c236068af3d0.scn" ]
-dest_md5="ca90186c02f5345e55c1bba79db76e2d"
+dest_files=[ "res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn" ]
+dest_md5="9202a99305f6b995d502440d29575408"
 
 [params]
 

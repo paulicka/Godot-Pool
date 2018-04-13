@@ -7,7 +7,7 @@ const corner2 = 10
 var slots = []
 
 func _ready():
-	for ball in get_children():
+	for ball in $Balls.get_children():
 		slots.push_back(ball)
 	shuffle()
 	fix()
@@ -16,7 +16,7 @@ func _process(delta):
 	pass
 
 func shuffle():
-	var shuffles = randi() % 2048 + 50
+	var shuffles = randi() % 7000 + 500
 	while shuffles >= 0:
 		var ball1 = randi() % slots.size()
 		var ball2 = randi() % slots.size()
@@ -25,16 +25,21 @@ func shuffle():
 		shuffles -= 1
 
 func fix():
-	swap_balls(get_ball_idx(Game.ball_class.BALL_8), slots[center].get_index())
+	swap_balls(get_ball_idx(Game.ball_class.BALL_8), center)
+	
+	var i = 0
 	for ball in slots:
 		if ball.type < Game.ball_class.BALL_8:
-			swap_balls(ball.get_index(), slots[corner1].get_index())
+			swap_balls(i, corner1)
 			break
+		i += 1
 	
+	i = 0
 	for ball in slots:
 		if ball.type > Game.ball_class.BALL_8:
-			swap_balls(ball.get_index(), slots[corner2].get_index())
+			swap_balls(i, corner2)
 			break
+		i += 1
 	
 
 func swap_balls(idx_1, idx_2):
@@ -45,9 +50,8 @@ func swap_balls(idx_1, idx_2):
 	ball1.translation = ball2.translation
 	ball2.translation = temp
 	
-	var temp_ball = slots[idx_1]
-	slots[idx_1] = slots[idx_2]
-	slots[idx_2] = temp_ball
+	slots[idx_1] = ball2
+	slots[idx_2] = ball1
 
 func get_ball(type):
 	for ball in slots:
@@ -55,4 +59,8 @@ func get_ball(type):
 			return ball
 
 func get_ball_idx(type):
-	return get_ball(type).get_index()
+	var i = 0
+	for ball in slots:
+		if ball.type == type:
+			return i
+		i += 1
