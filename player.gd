@@ -9,7 +9,25 @@ func _process(delta):
 	if Game.game_in_progress():
 		process_world(Game.world, delta)
 
+func _input(event):
+	pass
+
 func process_world(world, delta):
+	match Game.stage:
+		Game.Stage.PLAN:
+			match Game.mode:
+				Game.Mode.PICK_YAW:
+					pass
+				Game.Mode.PICK_PITCH:
+					pass
+				Game.Mode.PICK_IMPACT:
+					pass
+				Game.Mode.ROAM:
+					free_move(world, delta)
+		Game.Stage.PLAY:
+			free_move(world, delta)
+
+func free_move(world, delta):
 	var move = Vector2()
 	var movement = 18.0 * delta
 	if Input.is_key_pressed(KEY_W):
