@@ -15,12 +15,18 @@ func _ready():
 func _process(delta):
 	pass
 
+func lock():
+	pass
+
+func unlock():
+	pass
+
 func shuffle():
+	randomize()
 	var shuffles = randi() % 7000 + 500
 	while shuffles >= 0:
 		var ball1 = randi() % slots.size()
 		var ball2 = randi() % slots.size()
-		
 		swap_balls(ball1, ball2)
 		shuffles -= 1
 

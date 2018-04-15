@@ -2,15 +2,15 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn"
+path="res://.import/cue.dae-0b795e59a916305f8b84f1961b80ec62.scn"
 
 [deps]
 
-source_file="res://ball/triangle_rack/rack.dae"
-source_md5="1308b7e2bdc9541802e714ec234e88b7"
+source_file="res://cue/cue.dae"
+source_md5="f4823c1c280ff12ac3bef1ccbeb75272"
 
-dest_files=[ "res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn" ]
-dest_md5="9202a99305f6b995d502440d29575408"
+dest_files=[ "res://.import/cue.dae-0b795e59a916305f8b84f1961b80ec62.scn" ]
+dest_md5="ef63c5079db5417f5a108a88370e65a0"
 
 [params]
 
@@ -20,7 +20,7 @@ nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 materials/location=1
-materials/storage=1
+materials/storage=0
 materials/keep_on_reimport=true
 meshes/compress=true
 meshes/ensure_tangents=true

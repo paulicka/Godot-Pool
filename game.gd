@@ -20,7 +20,7 @@ enum Stage{
 	PLAN, PLAY
 }
 signal new_stage(stage)
-var stage = Stage.PLAY setget set_stage
+var stage = Stage.PLAN setget set_stage
 func set_stage(new_stage):
 	stage = new_stage
 	emit_signal("new_stage", stage)
@@ -28,7 +28,7 @@ func set_stage(new_stage):
 
 
 enum Mode{
-	PICK_YAW, PICK_PITCH, PICK_IMPACT, ROAM
+	PICK_ANGLE, PICK_POWER, PICK_IMPACT, ROAM
 }
 signal new_mode(mode)
 var mode = Mode.ROAM setget set_mode
