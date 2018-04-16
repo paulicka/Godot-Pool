@@ -70,3 +70,6 @@ func get_ball_idx(type):
 		if ball.type == type:
 			return i
 		i += 1
+
+func lift_rack():
+	pass

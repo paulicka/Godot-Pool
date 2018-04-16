@@ -53,13 +53,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0335793, 0 )
 
 [node name="Cue" parent="." index="5" instance=ExtResource( 6 )]
 
-transform = Transform( 0.996195, 0.0871558, 0, -0.0871558, 0.996195, 0, 0, 0, 1, -18.125, 1.125, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.875, 1.125, 0 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Ball" parent="." index="6" instance=ExtResource( 7 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 1.125, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.875, 1.125, 0 )
 _sections_unfolded = [ "Transform" ]
 type = 15
+
+[node name="FollowCueBall" type="RemoteTransform" parent="Ball" index="2"]
+
+remote_path = NodePath("../../Cue")
+use_global_coordinates = false
+update_position = true
+update_rotation = true
+update_scale = true
+_sections_unfolded = [ "Transform", "Update" ]
 
 

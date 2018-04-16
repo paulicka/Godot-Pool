@@ -4,7 +4,7 @@
 [ext_resource path="res://ball/ball/ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ball/triangle_rack/rack.tscn" type="PackedScene" id=3]
 
-[node name="PoolSet" type="Spatial"]
+[node name="PoolSet" type="Spatial" index="0"]
 
 script = ExtResource( 1 )
 
