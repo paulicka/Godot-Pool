@@ -4,7 +4,10 @@ func _ready():
 	Game.connect("new_mode", self, "_new_mode")
 
 func _process(delta):
-	pass
+	var cue_pos = global_transform.origin
+	cue_pos = Vector2(cue_pos.x, cue_pos.y)
+	var cursor_pos = Game.world.cursor_pos
+	rotation.y = cursor_pos.angle_to_point(cue_pos)
 
 func _new_mode(mode):
 	pass

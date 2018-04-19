@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://world/world.gd" type="Script" id=1]
 [ext_resource path="res://world/world_env.tres" type="Environment" id=2]
@@ -8,7 +8,11 @@
 [ext_resource path="res://cue/cue.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ball/cue_ball/cue_ball.tscn" type="PackedScene" id=7]
 
-[node name="World" type="Node" index="0"]
+[sub_resource type="PlaneShape" id=1]
+
+plane = Plane( 0, 1, 0, 0 )
+
+[node name="World" type="Node"]
 
 script = ExtResource( 1 )
 
@@ -70,5 +74,23 @@ update_position = true
 update_rotation = true
 update_scale = true
 _sections_unfolded = [ "Transform", "Update" ]
+
+[node name="InputPlane" type="StaticBody" parent="." index="7"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 2
+collision_mask = 0
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="Plane" type="CollisionShape" parent="InputPlane" index="0"]
+
+shape = SubResource( 1 )
+disabled = false
 
 
