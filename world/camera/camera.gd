@@ -39,7 +39,7 @@ func zoom(amount):
 func project_ray(point):
 	var from = $Camera.project_ray_origin(point)
 	var to = from + $Camera.project_ray_normal(point) * 1000
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], 0x20000000)
+	var result = get_world().direct_space_state.intersect_ray(from, to, [], 0x00000002)
 	if result:
 		return result.position
 	else:
