@@ -11,6 +11,9 @@ var pitch = 0.6
 var zoom = (max_zoom + min_zoom) / 2.0
 var pos = Vector2()
 
+func _ready():
+	pass
+
 func _process(delta):
 	var current_pos = Vector2(translation.x, translation.z)
 	current_pos += (pos - current_pos) * min(1.0, factor * delta)
@@ -39,11 +42,8 @@ func zoom(amount):
 func project_ray(point):
 	var from = $Camera.project_ray_origin(point)
 	var to = from + $Camera.project_ray_normal(point) * 1000
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], 0x00000002)
+	var result = get_world().direct_space_state.intersect_ray(from, to, [], 0x2)
 	if result:
 		return result.position
 	else:
 		return null
-
-
-

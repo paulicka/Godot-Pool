@@ -11,8 +11,11 @@ script/source = "extends Spatial
 
 onready var rot_icon = $RotationIcon
 
+var rot = 0.0
+
 func _process(delta):
-	rot_icon.rotation_degrees.y -= 75.0 * delta"
+	rot += 1.2 * delta
+	rot_icon.global_transform.basis = Basis(Vector3(0, rot, 0))"
 
 [node name="Cue" type="Spatial" index="0"]
 
@@ -74,6 +77,8 @@ region_rect = Rect2( 0, 0, 0, 0 )
 _sections_unfolded = [ "Flags", "Geometry", "Transform" ]
 
 [node name="PowerInfo" type="Spatial" parent="." index="2"]
+
+visible = false
 
 [node name="PowerIcon" type="Sprite3D" parent="PowerInfo" index="0"]
 

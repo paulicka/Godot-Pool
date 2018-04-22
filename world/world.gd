@@ -13,7 +13,7 @@ func _physics_process(delta):
 	var pos = $Camera.project_ray(get_viewport().get_mouse_position())
 	if pos != null:
 		cursor_pos.x = pos.x
-		cursor_pos.y = pos.y
+		cursor_pos.y = pos.z
 
 func get_camera():
 	return $Camera

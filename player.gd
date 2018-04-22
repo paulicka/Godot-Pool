@@ -2,48 +2,41 @@ extends Node
 
 signal my_turn()
 
+var roam = true
+
 func _ready():
-	Game.connect("new_mode", self, "lock_camera")
+	pass
 
 func _process(delta):
 	if Game.game_in_progress():
 		process_world(Game.world, delta)
 
 func _input(event):
+	if not event.is_pressed(): return
+	
+	if event.is_action("roam"):
+		roam = !roam
+	
 	if Game.stage == Game.Stage.PLAY: return
+	
 	if event.is_action("pick_yaw"):
 		Game.set_mode(Game.Mode.PICK_ANGLE)
 	if event.is_action("pick_power"):
 		Game.set_mode(Game.Mode.PICK_POWER)
 	if event.is_action("pick_impact"):
 		Game.set_mode(Game.Mode.PICK_IMPACT)
-	if event.is_action("roam"):
-		Game.set_mode(Game.Mode.ROAM)
+	
 
 func process_world(world, delta):
-	match Game.stage:
-		Game.Stage.PLAN:
-			match Game.mode:
-				Game.Mode.PICK_ANGLE:
-					free_move(world, delta, false)
-				Game.Mode.PICK_POWER:
-					free_move(world, delta, false)
-				Game.Mode.PICK_IMPACT:
-					free_move(world, delta, false, false)
-				Game.Mode.ROAM:
-					free_move(world, delta)
-		Game.Stage.PLAY:
-			free_move(world, delta)
+	if roam:
+		free_move(world, delta)
+	else:
+		lock_camera()
+		free_move(world, delta, false)
 
-func lock_camera(mode):
-	match mode:
-		Game.Mode.PICK_ANGLE:
-			continue
-		Game.Mode.PICK_POWER:
-			continue
-		Game.Mode.PICK_IMPACT:
-			var t = Game.world.get_cue_ball.translation
-			Game.world.get_camera().move_to(Vector2(t.x, t.y))
+func lock_camera():
+	var t = Game.world.get_cue().global_transform.origin
+	Game.world.get_camera().move_to(Vector2(t.x, t.z))
 
 func free_move(world, delta, allow_move = true, allow_pan = true, allow_zoom = true):
 	if allow_move:

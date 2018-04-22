@@ -7,7 +7,7 @@ path="res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn"
 [deps]
 
 source_file="res://ball/triangle_rack/rack.dae"
-source_md5="192cdf0fac7f96b231a5020f0668c9ba"
+source_md5="1308b7e2bdc9541802e714ec234e88b7"
 
 dest_files=[ "res://.import/rack.dae-90596ddfd6af0ddd9c2e9b4c3ece33c9.scn" ]
 dest_md5="8ea1375dd2dd72979e06aa76ebbad464"

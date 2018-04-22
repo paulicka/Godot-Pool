@@ -28,10 +28,10 @@ func set_stage(new_stage):
 
 
 enum Mode{
-	PICK_ANGLE, PICK_POWER, PICK_IMPACT, ROAM
+	PICK_ANGLE, PICK_POWER, PICK_IMPACT, NONE
 }
 signal new_mode(mode)
-var mode = Mode.ROAM setget set_mode
+var mode = Mode.NONE setget set_mode
 func set_mode(new_mode):
 	mode = new_mode
 	emit_signal("new_mode", mode)

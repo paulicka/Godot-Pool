@@ -7,7 +7,7 @@ path="res://.import/cue.dae-0b795e59a916305f8b84f1961b80ec62.scn"
 [deps]
 
 source_file="res://cue/cue.dae"
-source_md5="29222a72c93bf34b062b537b9aa0e125"
+source_md5="f4823c1c280ff12ac3bef1ccbeb75272"
 
 dest_files=[ "res://.import/cue.dae-0b795e59a916305f8b84f1961b80ec62.scn" ]
 dest_md5="84474c2135983f5ee83b263c4613810e"
