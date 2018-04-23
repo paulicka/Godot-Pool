@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://world/world.gd" type="Script" id=1]
 [ext_resource path="res://world/world_env.tres" type="Environment" id=2]
@@ -6,13 +6,19 @@
 [ext_resource path="res://world/camera/camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ball/pool_balls.tscn" type="PackedScene" id=5]
 [ext_resource path="res://cue/cue.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ball/cue_ball/cue_ball.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ball/cue_ball/cue_ball.gd" type="Script" id=7]
+[ext_resource path="res://ball/ball/ball.material" type="Material" id=8]
+[ext_resource path="res://ball/ball/pool_ball.mesh" type="ArrayMesh" id=9]
 
-[sub_resource type="PlaneShape" id=1]
+[sub_resource type="SphereShape" id=1]
+
+radius = 1.13
+
+[sub_resource type="PlaneShape" id=2]
 
 plane = Plane( 0, 1, 0, 0 )
 
-[node name="World" type="Node"]
+[node name="World" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -62,23 +68,71 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0335793, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.875, 1.125, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Ball" parent="." index="6" instance=ExtResource( 7 )]
+[node name="CueBall" type="RigidBody" parent="." index="6"]
 
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.875, 1.125, 0 )
-_sections_unfolded = [ "Transform" ]
-type = 15
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 5.0
+friction = 0.0
+bounce = 0.8
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = true
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+linear_velocity = Vector3( 0, 0, 0 )
+linear_damp = -1.0
+angular_velocity = Vector3( 0, 0, 0 )
+angular_damp = -1.0
+script = ExtResource( 7 )
+_sections_unfolded = [ "Axis Lock", "Collision", "Transform" ]
 
-[node name="FollowCueBall" type="RemoteTransform" parent="Ball" index="2"]
+[node name="CollisionSphere" type="CollisionShape" parent="CueBall" index="0"]
+
+shape = SubResource( 1 )
+disabled = false
+
+[node name="BallMesh" type="MeshInstance" parent="CueBall" index="1"]
+
+layers = 1
+material_override = ExtResource( 8 )
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 9 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Geometry", "Transform" ]
+
+[node name="FollowCueBall" type="RemoteTransform" parent="CueBall" index="2"]
 
 remote_path = NodePath("../../Cue")
-use_global_coordinates = false
+use_global_coordinates = true
 update_position = true
-update_rotation = true
-update_scale = true
+update_rotation = false
+update_scale = false
 _sections_unfolded = [ "Transform", "Update" ]
 
 [node name="InputPlane" type="StaticBody" parent="." index="7"]
 
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0 )
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -92,7 +146,25 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Plane" type="CollisionShape" parent="InputPlane" index="0"]
 
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+disabled = false
+
+[node name="Ceiling" type="StaticBody" parent="." index="8"]
+
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.25, 0 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+friction = 0.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Plane" type="CollisionShape" parent="Ceiling" index="0"]
+
+shape = SubResource( 2 )
 disabled = false
 
 

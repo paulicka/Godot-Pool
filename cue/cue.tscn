@@ -42,6 +42,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="AngleInfo" type="Spatial" parent="." index="1"]
 
+visible = false
 script = SubResource( 1 )
 
 [node name="RotationIcon" type="Sprite3D" parent="AngleInfo" index="0"]

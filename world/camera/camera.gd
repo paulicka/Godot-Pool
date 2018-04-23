@@ -41,6 +41,7 @@ func zoom(amount):
 
 func project_ray(point):
 	var from = $Camera.project_ray_origin(point)
+	#var from = $Camera.global_transform.origin
 	var to = from + $Camera.project_ray_normal(point) * 1000
 	var result = get_world().direct_space_state.intersect_ray(from, to, [], 0x2)
 	if result:

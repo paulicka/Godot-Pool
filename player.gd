@@ -26,6 +26,13 @@ func _input(event):
 	if event.is_action("pick_impact"):
 		Game.set_mode(Game.Mode.PICK_IMPACT)
 	
+	if event.is_action("hit"):
+		var cue = Game.world.get_cue()
+		var power = cue.get_power()
+		var angle = cue.get_angle()
+		var impulse = Vector2(cos(angle) * power, -sin(angle) * power)
+		cue.hit()
+		Game.world.get_cue_ball().hit(impulse)
 
 func process_world(world, delta):
 	if roam:

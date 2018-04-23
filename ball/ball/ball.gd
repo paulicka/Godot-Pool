@@ -1,5 +1,5 @@
 tool
-extends Node
+extends RigidBody
 
 const BALL_SIZE = 1.125
 
@@ -8,8 +8,7 @@ enum Ball{
 	SOLID_4, SOLID_5, SOLID_6,
 	SOLID_7, BALL_8, STRIPE_9,
 	STRIPE_10, STRIPE_11, STRIPE_12,
-	STRIPE_13, STRIPE_14, STRIPE_15,
-	CUE_BALL
+	STRIPE_13, STRIPE_14, STRIPE_15
 }
 
 export(Ball) var type setget set_type

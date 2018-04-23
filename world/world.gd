@@ -12,14 +12,13 @@ func _process(delta):
 func _physics_process(delta):
 	var pos = $Camera.project_ray(get_viewport().get_mouse_position())
 	if pos != null:
-		cursor_pos.x = pos.x
-		cursor_pos.y = pos.z
+		cursor_pos = Util.to_vec2(pos)
 
 func get_camera():
 	return $Camera
 
 func get_cue_ball():
-	return $Ball
+	return $CueBall
 
 func get_cue():
 	return $Cue
