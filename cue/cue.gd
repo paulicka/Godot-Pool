@@ -13,6 +13,8 @@ func _ready():
 	Game.connect("new_mode", self, "_new_mode")
 
 func _process(delta):
+	translation = Game.world.get_cue_ball().translation
+	
 	match Game.mode:
 		Game.Mode.PICK_ANGLE:
 			var cue_pos = global_transform.origin

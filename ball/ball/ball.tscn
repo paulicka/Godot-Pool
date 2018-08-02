@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ball/ball/ball.gd" type="Script" id=1]
 [ext_resource path="res://ball/ball/ball.material" type="Material" id=2]
@@ -8,19 +8,24 @@
 
 radius = 1.13
 
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 1.0
+
 [node name="Ball" type="RigidBody" index="0"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
 collision_layer = 1
-collision_mask = 1
-mode = 0
+collision_mask = 5
+mode = 1
 mass = 1.0
 friction = 1.0
 bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
-continuous_cd = true
+continuous_cd = false
 contacts_reported = 0
 contact_monitor = false
 sleeping = false
@@ -36,7 +41,7 @@ linear_damp = -1.0
 angular_velocity = Vector3( 0, 0, 0 )
 angular_damp = -1.0
 script = ExtResource( 1 )
-type = null
+_sections_unfolded = [ "Axis Lock", "Collision" ]
 
 [node name="CollisionSphere" type="CollisionShape" parent="." index="0"]
 
@@ -58,5 +63,30 @@ mesh = ExtResource( 3 )
 skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Geometry", "Transform" ]
+
+[node name="BallSimulator" type="RigidBody2D" parent="." index="2"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 2
+mass = 1.0
+friction = 0.0
+bounce = 0.9
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 2
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="CircleShape" type="CollisionShape2D" parent="BallSimulator" index="0"]
+
+shape = SubResource( 2 )
 
 
