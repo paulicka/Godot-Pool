@@ -66,6 +66,7 @@ _sections_unfolded = [ "Transform" ]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.15, 0 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform" ]
+type = null
 
 [node name="InputPlane" type="StaticBody" parent="." index="7"]
 

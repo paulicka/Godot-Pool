@@ -2,8 +2,7 @@ tool
 extends RigidBody
 
 const BALL_SIZE = 1.125
-const DAMPENING = 50.0
-const MAX_ITERATIONS = 4
+const CIRCUMFERENCE = 2.0 * PI * BALL_SIZE
 
 enum Ball{
 	CUE_BALL,
@@ -17,18 +16,26 @@ enum Ball{
 export(Ball) var type setget set_type
 var current_style = 0
 
-var velocity = Vector2()
+var last_position
 
 func _ready():
-	$BallSimulator.position = Vector2(translation.x, translation.z)
+	last_position = Vector2(translation.x, translation.z)
+	$BallSimulator.position = last_position
 	$BallSimulator/CircleShape.shape.radius = BALL_SIZE
 
 func _physics_process(delta):
 	# This stops the editor from constantly updating
 	if Engine.editor_hint: return
 	
+	last_position = Vector2(translation.x, translation.z)
 	var position = $BallSimulator.position
 	translation = Vector3(position.x, BALL_SIZE, position.y)
+	
+	var velocity = position - last_position
+	if velocity != Vector2():
+		var axis = velocity.rotated(PI / -2.0).normalized()
+		var angle = velocity.length() / CIRCUMFERENCE * 2.0
+		transform.basis = transform.basis.rotated(Vector3(axis.x, 0, axis.y), angle)
 
 func hit(impulse):
 	$BallSimulator.apply_impulse(Vector2(), impulse)
