@@ -16,11 +16,37 @@ plane = Plane( 0, 1, 0, 0 )
 
 script = ExtResource( 1 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+[node name="Viewport" type="Viewport" parent="." index="0"]
+
+arvr = false
+size = Vector2( 0, 0 )
+own_world = false
+world = null
+transparent_bg = true
+msaa = 0
+hdr = true
+disable_3d = false
+usage = 0
+debug_draw = 0
+render_target_v_flip = false
+render_target_clear_mode = 0
+render_target_update_mode = 2
+audio_listener_enable_2d = false
+audio_listener_enable_3d = false
+physics_object_picking = false
+gui_disable_input = false
+gui_snap_controls_to_pixels = true
+shadow_atlas_size = 0
+shadow_atlas_quad_0 = 2
+shadow_atlas_quad_1 = 2
+shadow_atlas_quad_2 = 3
+shadow_atlas_quad_3 = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
 
 environment = ExtResource( 2 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="1"]
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
 
 transform = Transform( -0.439385, 0.898234, -0.0108052, 0.643652, 0.323198, 0.693725, 0.62662, 0.297858, -0.720158, 0, 26, 0 )
 layers = 1
@@ -47,28 +73,27 @@ directional_shadow_bias_split_scale = 0.25
 directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 
-[node name="Table" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Table" parent="." index="3" instance=ExtResource( 3 )]
 
-[node name="Camera" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Camera" parent="." index="4" instance=ExtResource( 4 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0 )
 
-[node name="PoolBalls" parent="." index="4" instance=ExtResource( 5 )]
+[node name="PoolBalls" parent="." index="5" instance=ExtResource( 5 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0335793, 0 )
 
-[node name="Cue" parent="." index="5" instance=ExtResource( 6 )]
+[node name="Cue" parent="." index="6" instance=ExtResource( 6 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.875, 1.125, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CueBall" parent="." index="6" instance=ExtResource( 7 )]
+[node name="CueBall" parent="." index="7" instance=ExtResource( 7 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.125, 0 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform" ]
-type = null
 
-[node name="InputPlane" type="StaticBody" parent="." index="7"]
+[node name="InputPlane" type="StaticBody" parent="." index="8"]
 
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.125, 0 )

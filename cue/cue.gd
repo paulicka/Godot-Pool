@@ -30,6 +30,8 @@ func _process(delta):
 			rot = -cursor_pos.angle_to_point(cue_pos)
 			
 			rotation.y = rot
+			calculate_ball_indicator()
+		
 		Game.Mode.PICK_POWER:
 			var cue_pos = global_transform.origin
 			cue_pos = Util.to_vec2(cue_pos)
@@ -45,6 +47,37 @@ func _process(delta):
 			time += delta * (linear_power * linear_power + 0.1) * 0.7
 			# Make tool script to see this animated
 			$PowerInfo/PowerIcon.material_override.set_shader_param("time", time)
+
+func calculate_ball_indicator():
+	var result = Game.world.get_cue_ball().cast(Util.angle_vec2(rot, 1))
+	if result:
+		var point = result["point"]
+		var distance = Util.to_vec2(translation).distance_to(point)
+		$CueTrajectory/CollisionIcon.translation.x = distance
+	else:
+		# Hit a wall. (For some reason cast_motion doesn't detect plane shapes)
+		var width  = Game.world.get_table().ACTUAL_TABLE_WIDTH - Game.world.get_cue_ball().BALL_SIZE
+		var height = Game.world.get_table().ACTUAL_TABLE_HEIGHT - Game.world.get_cue_ball().BALL_SIZE
+		
+		var top_left  = Vector2(-width, height)
+		var top_right = Vector2(width, height)
+		var bot_left  = Vector2(-width, -height)
+		var bot_right = Vector2(width, -height)
+		
+		var start = Util.to_vec2(translation)
+		var end = start + Util.angle_vec2(rot, 100)
+		end.y = -end.y
+		
+		var intersection = null
+		intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, top_right)
+		if intersection == null:
+			intersection = Geometry.segment_intersects_segment_2d(start, end, bot_left, bot_right)
+		if intersection == null:
+			intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, bot_left)
+		if intersection == null:
+			intersection = Geometry.segment_intersects_segment_2d(start, end, top_right, bot_right)
+		if intersection != null:
+			$CueTrajectory/CollisionIcon.translation.x = start.distance_to(intersection)
 
 func get_power():
 	return range_lerp(power, min_dist, max_dist, min_power, max_power)
@@ -71,4 +104,8 @@ func _new_mode(mode):
 			$PowerInfo.hide()
 
 func _new_stage(stage):
-	visible = stage == Game.Stage.PLAN
+	if stage == Game.Stage.PLAN:
+		visible = true
+		calculate_ball_indicator()
+	else:
+		visible = false

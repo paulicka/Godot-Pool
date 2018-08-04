@@ -14,3 +14,6 @@ func to_vec2(vec3):
 
 func to_vec3(vec2):
 	return Vector3(vec2.x, 0, vec2.y)
+
+func angle_vec2(angle, length):
+	return Vector2(cos(angle) * length, sin(angle) * length)

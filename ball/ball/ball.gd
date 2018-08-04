@@ -41,7 +41,9 @@ func _physics_process(delta):
 func _collided(body):
 	if body.name == "BallSimulator" and is_greater_than(body):
 		#print("hit")
-		Game.world.add_child(COLLISION_PLAYER.new(COLLISION_PLAYER.BALL_COLLISION))
+		var player = COLLISION_PLAYER.new(COLLISION_PLAYER.BALL_COLLISION)
+		player.translation = Util.to_vec3((body.global_position + $BallSimulator.global_position) * 0.5)
+		Game.world.add_child(player)
 
 func hit(impulse):
 	$BallSimulator.apply_impulse(Vector2(), impulse)
@@ -51,6 +53,25 @@ func is_still():
 
 func force_still():
 	$BallSimulator.linear_velocity = Vector2()
+
+func cast(dir):
+	var result = Physics2DTestMotionResult.new()
+	dir.y = -dir.y
+	var collided = $BallSimulator.test_motion(dir * 100, 0.001, result)
+	if collided:
+		var data = {
+			"this": self,
+			"this_motion": result.motion_remainder,
+
+			"point": result.collision_point,
+			"normal": result.collision_normal
+		}
+		if result.collider.name == "BallSimulator":
+			data["that"] = result.collider
+			data["that_motion"] = result.collider_velocity
+		return data
+	else:
+		return {}
 
 func set_type(new_type):
 	if type != new_type:

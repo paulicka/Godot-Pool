@@ -17,6 +17,9 @@ func _physics_process(delta):
 func get_camera():
 	return $Camera
 
+func get_table():
+	return $Table
+
 func get_cue_ball():
 	return $CueBall
 

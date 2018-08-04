@@ -97,6 +97,7 @@ shape = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="3"]
 
+visible = false
 anchor_mode = 1
 rotating = false
 current = true
