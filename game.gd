@@ -81,10 +81,31 @@ func _ready():
 	player_turn = get_child(0)
 
 func _process(delta):
-	pass
+	if stage == Stage.PLAY:
+		if world.balls_are_still():
+			world.force_still()
+			set_stage(Stage.PLAN)
 
 func game_in_progress():
 	return screen == Screen.GAME
 
 func new_player():
 	add_child(player_class.new())
+
+func get_player():
+	return get_node(str(get_tree().get_network_unique_id()))
+
+func is_current_turn():
+	return true# get_player() == player_turn
+
+func play_turn():
+	# TODO Check if it's players turn
+	
+	var cue = world.get_cue()
+	var power = cue.get_power()
+	var angle = cue.get_angle()
+	var impulse = Vector2(cos(angle) * power, -sin(angle) * power)
+	cue.hit()
+	world.get_cue_ball().hit(impulse)
+	
+	set_stage(Stage.PLAY)

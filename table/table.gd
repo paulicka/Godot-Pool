@@ -2,7 +2,7 @@ extends Spatial
 
 const TABLE_WIDTH = 48.0
 const TABLE_HEIGHT = 24.0
-const TABLE_INSET = 0.5
+const TABLE_INSET = 0.3
 
 func _ready():
 	$StaticBody2D/Top.shape.d = -TABLE_HEIGHT + TABLE_INSET

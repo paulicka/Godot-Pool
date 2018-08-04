@@ -2,20 +2,16 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.s3tc.stex"
-path.etc2="res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.etc2.stex"
+path="res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.stex"
 
 [deps]
 
 source_file="res://cue/power_indicator.png"
-source_md5="198fd11c8d4ccb947ad50be73d2a0aff"
-
-dest_files=[ "res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.s3tc.stex", "res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.etc2.stex" ]
-dest_md5="c3ca403bde001ad7e9472cba0398a8a9"
+dest_files=[ "res://.import/power_indicator.png-715176d03d58a4365f46c0ea27951abd.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
@@ -23,7 +19,7 @@ flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

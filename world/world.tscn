@@ -64,7 +64,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CueBall" parent="." index="6" instance=ExtResource( 7 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.15, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 1.125, 0 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform" ]
 type = null
 

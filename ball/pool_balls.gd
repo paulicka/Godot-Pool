@@ -73,3 +73,6 @@ func get_ball_idx(type):
 
 func lift_rack():
 	pass
+
+func get_balls():
+	return $Balls.get_children()

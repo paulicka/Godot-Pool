@@ -42,7 +42,7 @@ hit=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","d
 [physics]
 
 2d/default_gravity_vector=Vector2( 0, 0 )
-2d/default_linear_damp=0.4
+2d/default_linear_damp=0.6
 
 [rendering]
 

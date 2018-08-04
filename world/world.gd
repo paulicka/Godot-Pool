@@ -25,3 +25,20 @@ func get_cue():
 
 func get_cursor_pos():
 	return cursor_pos
+
+func get_balls():
+	return $PoolBalls.get_balls()
+
+func balls_are_still():
+	var balls = $PoolBalls.get_balls()
+	balls.push_back($CueBall)
+	for ball in balls:
+		if not ball.is_still():
+			return false
+	return true
+
+func force_still():
+	var balls = $PoolBalls.get_balls()
+	balls.push_back($CueBall)
+	for ball in balls:
+		ball.force_still()

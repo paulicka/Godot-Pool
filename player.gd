@@ -17,7 +17,7 @@ func _input(event):
 	if event.is_action("roam"):
 		roam = !roam
 	
-	if Game.stage == Game.Stage.PLAY: return
+	if Game.stage != Game.Stage.PLAN or not Game.is_current_turn(): return
 	
 	if event.is_action("pick_yaw"):
 		Game.set_mode(Game.Mode.PICK_ANGLE)
@@ -27,12 +27,7 @@ func _input(event):
 		Game.set_mode(Game.Mode.PICK_IMPACT)
 	
 	if event.is_action("hit"):
-		var cue = Game.world.get_cue()
-		var power = cue.get_power()
-		var angle = cue.get_angle()
-		var impulse = Vector2(cos(angle) * power, -sin(angle) * power)
-		cue.hit()
-		Game.world.get_cue_ball().hit(impulse)
+		Game.play_turn()
 
 func process_world(world, delta):
 	if roam:

@@ -1,8 +1,10 @@
-tool
+#tool # TODO Add back in 3.1
 extends RigidBody
 
 const BALL_SIZE = 1.125
 const CIRCUMFERENCE = 2.0 * PI * BALL_SIZE
+
+const COLLISION_PLAYER = preload("collision_player.gd")
 
 enum Ball{
 	CUE_BALL,
@@ -16,29 +18,39 @@ enum Ball{
 export(Ball) var type setget set_type
 var current_style = 0
 
-var last_position
-
 func _ready():
-	last_position = Vector2(translation.x, translation.z)
-	$BallSimulator.position = last_position
 	$BallSimulator/CircleShape.shape.radius = BALL_SIZE
+	$BallSimulator.position = Util.to_vec2(translation)
+	#$BallSimulator/CircleShape.disabled = false
+	
+	$BallSimulator.connect("body_entered", self, "_collided")
 
 func _physics_process(delta):
 	# This stops the editor from constantly updating
 	if Engine.editor_hint: return
 	
-	last_position = Vector2(translation.x, translation.z)
 	var position = $BallSimulator.position
 	translation = Vector3(position.x, BALL_SIZE, position.y)
 	
-	var velocity = position - last_position
+	var velocity = $BallSimulator.linear_velocity * delta
 	if velocity != Vector2():
-		var axis = velocity.rotated(PI / -2.0).normalized()
-		var angle = velocity.length() / CIRCUMFERENCE * 2.0
-		transform.basis = transform.basis.rotated(Vector3(axis.x, 0, axis.y), angle)
+		var axis = velocity.rotated(PI * -0.5).normalized()
+		var angle = velocity.length() / BALL_SIZE
+		transform.basis = transform.basis.rotated(Util.to_vec3(axis), angle)
+
+func _collided(body):
+	if body.name == "BallSimulator" and is_greater_than(body):
+		#print("hit")
+		Game.world.add_child(COLLISION_PLAYER.new(COLLISION_PLAYER.BALL_COLLISION))
 
 func hit(impulse):
 	$BallSimulator.apply_impulse(Vector2(), impulse)
+
+func is_still():
+	return $BallSimulator.linear_velocity.length_squared() < 0.05
+
+func force_still():
+	$BallSimulator.linear_velocity = Vector2()
 
 func set_type(new_type):
 	if type != new_type:
