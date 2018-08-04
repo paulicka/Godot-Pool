@@ -1,22 +1,28 @@
 extends Spatial
 
-const factor = 7.0
-const max_pitch = PI/2 - 0.1
-const min_pitch = 0.1
-const max_zoom = 45.0
-const min_zoom = 5.0
+const FACTOR = 7.0
+const MAX_PITCH = PI/2 - 0.1
+const MIN_PITCH = 0.1
+const MAX_ZOOM = 45.0
+const MIN_ZOOM = 5.0
+const MARGIN = 12.0
 
 var yaw = 0.0
 var pitch = 0.6
-var zoom = (max_zoom + min_zoom) / 2.0
+var zoom = (MAX_ZOOM + MIN_ZOOM) / 2.0
 var pos = Vector2()
 
 func _ready():
 	pass
 
 func _process(delta):
+	var width = Game.world.get_table().ACTUAL_TABLE_WIDTH + MARGIN
+	var height = Game.world.get_table().ACTUAL_TABLE_HEIGHT + MARGIN
+	pos.x = clamp(pos.x, -width, width)
+	pos.y = clamp(pos.y, -height, height)
+	
 	var current_pos = Vector2(translation.x, translation.z)
-	current_pos += (pos - current_pos) * min(1.0, factor * delta)
+	current_pos += (pos - current_pos) * min(1.0, FACTOR * delta)
 	translation.x = current_pos.x
 	translation.z = current_pos.y
 	
@@ -33,11 +39,11 @@ func translate(amount):
 	pos += amount
 
 func rotate(yaw_amount, pitch_amount):
-	pitch = clamp(pitch + pitch_amount, min_pitch, max_pitch)
+	pitch = clamp(pitch + pitch_amount, MIN_PITCH, MAX_PITCH)
 	yaw += yaw_amount
 
 func zoom(amount):
-	zoom = clamp(zoom + amount, min_zoom, max_zoom)
+	zoom = clamp(zoom + amount, MIN_ZOOM, MAX_ZOOM)
 
 func project_ray(point):
 	var from = $Camera.project_ray_origin(point)
