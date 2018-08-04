@@ -3,8 +3,8 @@ extends Spatial
 const min_dist = 2.0
 const max_dist = 12.0
 
-const min_power = 1.0
-const max_power = 200.0
+const min_power = 3.0
+const max_power = 140.0
 
 var rot = 0.0
 var power = min_dist
@@ -51,33 +51,35 @@ func _process(delta):
 func calculate_ball_indicator():
 	var result = Game.world.get_cue_ball().cast(Util.angle_vec2(rot, 1))
 	if result:
-		var point = result["point"]
-		var distance = Util.to_vec2(translation).distance_to(point)
-		$CueTrajectory/CollisionIcon.translation.x = distance
-	else:
-		# Hit a wall. (For some reason cast_motion doesn't detect plane shapes)
-		var width  = Game.world.get_table().ACTUAL_TABLE_WIDTH - Game.world.get_cue_ball().BALL_SIZE
-		var height = Game.world.get_table().ACTUAL_TABLE_HEIGHT - Game.world.get_cue_ball().BALL_SIZE
-		
-		var top_left  = Vector2(-width, height)
-		var top_right = Vector2(width, height)
-		var bot_left  = Vector2(-width, -height)
-		var bot_right = Vector2(width, -height)
-		
-		var start = Util.to_vec2(translation)
-		var end = start + Util.angle_vec2(rot, 100)
-		end.y = -end.y
-		
-		var intersection = null
-		intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, top_right)
-		if intersection == null:
-			intersection = Geometry.segment_intersects_segment_2d(start, end, bot_left, bot_right)
-		if intersection == null:
-			intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, bot_left)
-		if intersection == null:
-			intersection = Geometry.segment_intersects_segment_2d(start, end, top_right, bot_right)
-		if intersection != null:
-			$CueTrajectory/CollisionIcon.translation.x = start.distance_to(intersection)
+		#var point = result["point"]
+		#var distance = Util.to_vec2(translation).distance_to(point)
+		#$CueTrajectory/CollisionIcon.translation.x = distance
+		$CueTrajectory/CollisionIcon.translation.x = result["distance"].length()
+#	else:
+#		# Hit a wall. (For some reason cast_motion doesn't detect plane shapes)
+#		# SHOULD BE FIXED WHEN COLLISION BODIES ARE ADDED
+#		var width  = Game.world.get_table().ACTUAL_TABLE_WIDTH - Game.world.get_cue_ball().BALL_SIZE
+#		var height = Game.world.get_table().ACTUAL_TABLE_HEIGHT - Game.world.get_cue_ball().BALL_SIZE
+#
+#		var top_left  = Vector2(-width, height)
+#		var top_right = Vector2(width, height)
+#		var bot_left  = Vector2(-width, -height)
+#		var bot_right = Vector2(width, -height)
+#
+#		var start = Util.to_vec2(translation)
+#		var end = start + Util.angle_vec2(rot, 100)
+#		end.y = -end.y
+#
+#		var intersection = null
+#		intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, top_right)
+#		if intersection == null:
+#			intersection = Geometry.segment_intersects_segment_2d(start, end, bot_left, bot_right)
+#		if intersection == null:
+#			intersection = Geometry.segment_intersects_segment_2d(start, end, top_left, bot_left)
+#		if intersection == null:
+#			intersection = Geometry.segment_intersects_segment_2d(start, end, top_right, bot_right)
+#		if intersection != null:
+#			$CueTrajectory/CollisionIcon.translation.x = start.distance_to(intersection)
 
 func get_power():
 	return range_lerp(power, min_dist, max_dist, min_power, max_power)

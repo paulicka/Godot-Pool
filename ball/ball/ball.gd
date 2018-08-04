@@ -41,7 +41,12 @@ func _physics_process(delta):
 func _collided(body):
 	if body.name == "BallSimulator" and is_greater_than(body):
 		#print("hit")
-		var player = COLLISION_PLAYER.new(COLLISION_PLAYER.BALL_COLLISION)
+		var speed = $BallSimulator.linear_velocity.distance_to(body.linear_velocity)
+		speed = sqrt(speed)
+		print(speed)
+		speed = clamp(speed, 0, 10)
+		#print(range_lerp(speed, 0, 5, 0.9, 1.1))
+		var player = COLLISION_PLAYER.new(COLLISION_PLAYER.BALL_COLLISION, range_lerp(speed, 0, 10, 0.9, 1.3))
 		player.translation = Util.to_vec3((body.global_position + $BallSimulator.global_position) * 0.5)
 		Game.world.add_child(player)
 
@@ -57,12 +62,13 @@ func force_still():
 func cast(dir):
 	var result = Physics2DTestMotionResult.new()
 	dir.y = -dir.y
-	var collided = $BallSimulator.test_motion(dir * 100, 0.001, result)
+	var collided = $BallSimulator.test_motion(dir * 100, 0.1, result)
 	if collided:
 		var data = {
 			"this": self,
 			"this_motion": result.motion_remainder,
-
+			
+			"distance": result.motion,
 			"point": result.collision_point,
 			"normal": result.collision_normal
 		}
