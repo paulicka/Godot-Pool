@@ -16,10 +16,10 @@ func _ready():
 	pass
 
 func _process(delta):
-	var width = Game.world.get_table().ACTUAL_TABLE_WIDTH + MARGIN
-	var height = Game.world.get_table().ACTUAL_TABLE_HEIGHT + MARGIN
-	pos.x = clamp(pos.x, -width, width)
-	pos.y = clamp(pos.y, -height, height)
+	#var width = Game.world.get_table().TABLE_WIDTH + MARGIN
+	#var height = Game.world.get_table().TABLE_HEIGHT + MARGIN
+	#pos.x = clamp(pos.x, -width, width)
+	#pos.y = clamp(pos.y, -height, height)
 	
 	var current_pos = Vector2(translation.x, translation.z)
 	current_pos += (pos - current_pos) * min(1.0, FACTOR * delta)

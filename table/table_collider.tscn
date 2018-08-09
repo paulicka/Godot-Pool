@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://table/table_collider.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 21, 13.0875 )
+_sections_unfolded = [ "Resource" ]
+
+[node name="StaticBody2D" type="StaticBody2D" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.4
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="TopLeft" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( -24, 36.9125 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TopRight" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 24, 36.9125 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BotLeft" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( -24, 33.825 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BotRight" type="CollisionShape2D" parent="." index="3"]
+
+position = Vector2( 24, 33.825 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TopHole" type="CollisionPolygon2D" parent="." index="4"]
+
+build_mode = 0
+polygon = PoolVector2Array( -3, -23.825, -3, -50, 3, -50, 3, -23.825, 0.797705, -25.9309, -0.826069, -25.9309 )
+
+
