@@ -58,7 +58,7 @@ func free_move(world, delta, allow_move = true, allow_pan = true, allow_zoom = t
 		var yaw = 0.0
 		var pitch = 0.0
 		var delta_yaw = 1.0 * delta
-		var delta_pitch = 0.4 * delta
+		var delta_pitch = 0.7 * delta
 		if Input.is_key_pressed(KEY_Q):
 			yaw -= delta_yaw
 		if Input.is_key_pressed(KEY_E):

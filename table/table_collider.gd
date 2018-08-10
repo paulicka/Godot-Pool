@@ -7,9 +7,9 @@ const TABLE_INSET = 0.175
 
 const HOLE_RADIUS = 2.0
 const HOLE_SIZE = 3.0
-const CORNER_HOLE_SIZE = 3.0
+const CORNER_HOLE_SIZE = 3.1
 
-const OUTER_WIDTH = 100.0
+const OUTER_WIDTH = 80.0
 const OUTER_HEIGHT = 50.0
 
 const ACTUAL_TABLE_WIDTH = TABLE_WIDTH - TABLE_INSET
@@ -26,6 +26,25 @@ func _ready():
 			Vector2(TABLE_WIDTH - CORNER_HOLE_SIZE, OUTER_HEIGHT)
 	)
 	
+	position_box($BotLeft,
+			Vector2(-TABLE_WIDTH + CORNER_HOLE_SIZE, -ACTUAL_TABLE_HEIGHT),
+			Vector2(-HOLE_SIZE, -OUTER_HEIGHT)
+	)
+	
+	position_box($BotRight,
+			Vector2(HOLE_SIZE, -ACTUAL_TABLE_HEIGHT),
+			Vector2(TABLE_WIDTH - CORNER_HOLE_SIZE, -OUTER_HEIGHT)
+	)
+	
+	position_box($Left,
+			Vector2(-OUTER_WIDTH, -TABLE_HEIGHT + CORNER_HOLE_SIZE),
+			Vector2(-ACTUAL_TABLE_WIDTH, TABLE_HEIGHT - CORNER_HOLE_SIZE)
+	)
+	
+	position_box($Right,
+			Vector2(OUTER_WIDTH, -TABLE_HEIGHT + CORNER_HOLE_SIZE),
+			Vector2(ACTUAL_TABLE_WIDTH, TABLE_HEIGHT - CORNER_HOLE_SIZE)
+	)
 
 static func position_box(box, start, end):
 	# Flip y since it's y-down

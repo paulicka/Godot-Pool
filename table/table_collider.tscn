@@ -1,12 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://table/table_collider.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 21, 13.0875 )
+extents = Vector2( 20.95, 13.0875 )
 _sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16.0875, 20.9 )
 
 [node name="StaticBody2D" type="StaticBody2D" index="0"]
 
@@ -22,31 +27,74 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="TopLeft" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -24, 36.9125 )
+position = Vector2( -23.95, -36.9125 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="TopRight" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 24, 36.9125 )
+position = Vector2( 23.95, -36.9125 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="BotLeft" type="CollisionShape2D" parent="." index="2"]
-
-position = Vector2( -24, 33.825 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="BotRight" type="CollisionShape2D" parent="." index="3"]
-
-position = Vector2( 24, 33.825 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="TopHole" type="CollisionPolygon2D" parent="." index="4"]
+[node name="TopHole" type="CollisionPolygon2D" parent="." index="2"]
 
 build_mode = 0
 polygon = PoolVector2Array( -3, -23.825, -3, -50, 3, -50, 3, -23.825, 0.797705, -25.9309, -0.826069, -25.9309 )
+
+[node name="BotLeft" type="CollisionShape2D" parent="." index="3"]
+
+position = Vector2( -23.95, 36.9125 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BotRight" type="CollisionShape2D" parent="." index="4"]
+
+position = Vector2( 23.95, 36.9125 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BotHole" type="CollisionPolygon2D" parent="." index="5"]
+
+scale = Vector2( 1, -1 )
+build_mode = 0
+polygon = PoolVector2Array( -3, -23.825, -3, -50, 3, -50, 3, -23.825, 0.797705, -25.9309, -0.826069, -25.9309 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Left" type="CollisionShape2D" parent="." index="6"]
+
+position = Vector2( -63.9125, 0 )
+shape = SubResource( 2 )
+
+[node name="Right" type="CollisionShape2D" parent="." index="7"]
+
+position = Vector2( 63.9125, 0 )
+shape = SubResource( 2 )
+
+[node name="TopLeftHole" type="CollisionPolygon2D" parent="." index="8"]
+
+scale = Vector2( -1, 1 )
+build_mode = 0
+polygon = PoolVector2Array( 44.9, -23.825, 47.356, -26, 48.9, -26, 50, -24.9093, 50, -23.3568, 47.825, -20.9, 80, -20.9, 80, -50, 44.9, -50 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TopRightHole" type="CollisionPolygon2D" parent="." index="9"]
+
+build_mode = 0
+polygon = PoolVector2Array( 44.9, -23.825, 47.356, -26, 48.9, -26, 50, -24.9093, 50, -23.3568, 47.825, -20.9, 80, -20.9, 80, -50, 44.9, -50 )
+
+[node name="BotLeftHole" type="CollisionPolygon2D" parent="." index="10"]
+
+scale = Vector2( -1, -1 )
+build_mode = 0
+polygon = PoolVector2Array( 44.9, -23.825, 47.356, -26, 48.9, -26, 50, -24.9093, 50, -23.3568, 47.825, -20.9, 80, -20.9, 80, -50, 44.9, -50 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BotRightHole" type="CollisionPolygon2D" parent="." index="11"]
+
+scale = Vector2( 1, -1 )
+build_mode = 0
+polygon = PoolVector2Array( 44.9, -23.825, 47.356, -26, 48.9, -26, 50, -24.9093, 50, -23.3568, 47.825, -20.9, 80, -20.9, 80, -50, 44.9, -50 )
+_sections_unfolded = [ "Transform" ]
 
 
