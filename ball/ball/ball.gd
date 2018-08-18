@@ -18,6 +18,8 @@ enum Ball{
 export(Ball) var type setget set_type
 var current_style = 0
 
+var unlocked = false
+
 func _ready():
 	$BallSimulator/CircleShape.shape.radius = BALL_SIZE
 	$BallSimulator.position = Util.to_vec2(translation)
@@ -27,7 +29,7 @@ func _ready():
 
 func _physics_process(delta):
 	# This stops the editor from constantly updating
-	if Engine.editor_hint: return
+	if unlocked or Engine.editor_hint: return
 	
 	var position = $BallSimulator.position
 	translation = Vector3(position.x, BALL_SIZE, position.y)
@@ -78,6 +80,24 @@ func cast(dir):
 		return data
 	else:
 		return {}
+
+func ball_in():
+	if type == CUE_BALL:
+		translation = Vector3(-24, 1.125, 0)
+		$BallSimulator.position = Vector2(-24, 0)
+	else:
+		unlock_plane()
+
+func unlock_plane():
+	$BallSimulator/CircleShape.disabled = true
+	$CollisionSphere.disabled = false
+	linear_velocity = Vector3()
+	$BallSimulator.linear_velocity = Vector2()
+	unlocked = true
+	mode = MODE_RIGID
+
+func lock_plane():
+	pass
 
 func set_type(new_type):
 	if type != new_type:

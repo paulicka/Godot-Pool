@@ -35,7 +35,9 @@ hit=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","d
 
 [layer_names]
 
+2d_physics/layer_1="Ball"
 3d_physics/layer_1="Balls"
+2d_physics/layer_2="Wall"
 3d_physics/layer_2="Input"
 3d_physics/layer_3="Table"
 

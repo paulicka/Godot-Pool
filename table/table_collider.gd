@@ -15,32 +15,34 @@ const OUTER_HEIGHT = 50.0
 const ACTUAL_TABLE_WIDTH = TABLE_WIDTH - TABLE_INSET
 const ACTUAL_TABLE_HEIGHT = TABLE_HEIGHT - TABLE_INSET
 
+onready var top_hole = $TopHoleArea
+onready var bot_hole = $BotHoleArea
+onready var top_left_hole = $TopLeftHoleArea
+onready var top_right_hole = $TopRightHoleArea
+onready var bot_left_hole = $BotLeftHoleArea
+onready var bot_right_hole = $BotRightHoleArea
+
 func _ready():
 	position_box($TopLeft,
 			Vector2(-TABLE_WIDTH + CORNER_HOLE_SIZE, ACTUAL_TABLE_HEIGHT),
 			Vector2(-HOLE_SIZE, OUTER_HEIGHT)
 	)
-	
 	position_box($TopRight,
 			Vector2(HOLE_SIZE, ACTUAL_TABLE_HEIGHT),
 			Vector2(TABLE_WIDTH - CORNER_HOLE_SIZE, OUTER_HEIGHT)
 	)
-	
 	position_box($BotLeft,
 			Vector2(-TABLE_WIDTH + CORNER_HOLE_SIZE, -ACTUAL_TABLE_HEIGHT),
 			Vector2(-HOLE_SIZE, -OUTER_HEIGHT)
 	)
-	
 	position_box($BotRight,
 			Vector2(HOLE_SIZE, -ACTUAL_TABLE_HEIGHT),
 			Vector2(TABLE_WIDTH - CORNER_HOLE_SIZE, -OUTER_HEIGHT)
 	)
-	
 	position_box($Left,
 			Vector2(-OUTER_WIDTH, -TABLE_HEIGHT + CORNER_HOLE_SIZE),
 			Vector2(-ACTUAL_TABLE_WIDTH, TABLE_HEIGHT - CORNER_HOLE_SIZE)
 	)
-	
 	position_box($Right,
 			Vector2(OUTER_WIDTH, -TABLE_HEIGHT + CORNER_HOLE_SIZE),
 			Vector2(ACTUAL_TABLE_WIDTH, TABLE_HEIGHT - CORNER_HOLE_SIZE)
